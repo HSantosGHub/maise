@@ -377,6 +377,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:13p
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(–border2);border-radius:2px;}
+/* light mode — ensure cells and bars have clear visual separation */
+.light-mode .day-cell{box-shadow:0 1px 3px rgba(0,0,0,0.07);}
+.light-mode .bal-bar,.light-mode .acct-bar{box-shadow:0 1px 0 var(–border);}
 
 @media(max-width:600px){
 header{padding:11px 13px;}
@@ -707,7 +710,7 @@ let S={
     showPills:true,
     cellDensity:'comfortable', // 'compact'|'comfortable'|'spacious'
     accentColor:'#7effd4',
-    theme:'light',
+    theme:'dark',
     fontSize:1,
   },
 };
@@ -732,7 +735,7 @@ function load(){
     if(old){
       const o=JSON.parse(old);
       S={...S,...o};
-      if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'light',fontSize:1};
+      if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'dark',fontSize:1};
       if(!S.recurRules)S.recurRules=[];
       if(!S.recurIgnore)S.recurIgnore=[];
       // tag existing transactions with source
@@ -835,14 +838,16 @@ function applyPrefs(rerender){
   r.style.setProperty('--green-dim',`rgba(${rgb},0.12)`);
   // theme
   if(p.theme==='light'){
-    r.style.setProperty('--bg','#f4f5f7');
+    r.style.setProperty('--bg','#f0f2f5');
     r.style.setProperty('--surface','#ffffff');
-    r.style.setProperty('--surface2','#f0f1f3');
-    r.style.setProperty('--border','#dde0e8');
-    r.style.setProperty('--border2','#c8ccd6');
-    r.style.setProperty('--text','#1a1c22');
-    r.style.setProperty('--text2','#5a5f70');
-    r.style.setProperty('--text3','#9499a8');
+    r.style.setProperty('--surface2','#e8eaee');
+    r.style.setProperty('--border','#c8cdd8');
+    r.style.setProperty('--border2','#adb4c2');
+    r.style.setProperty('--text','#111318');
+    r.style.setProperty('--text2','#454c5e');
+    r.style.setProperty('--text3','#8a91a0');
+    r.style.setProperty('--red','#d63048');
+    r.style.setProperty('--red-dim','rgba(214,48,72,0.10)');
   } else {
     r.style.setProperty('--bg','#0e0f11');
     r.style.setProperty('--surface','#16181c');
@@ -852,6 +857,8 @@ function applyPrefs(rerender){
     r.style.setProperty('--text','#e8eaf0');
     r.style.setProperty('--text2','#8b909e');
     r.style.setProperty('--text3','#555b6a');
+    r.style.setProperty('--red','#ff6b7a');
+    r.style.setProperty('--red-dim','rgba(255,107,122,0.12)');
   }
   // font size + cell density — inject a <style> tag so Safari applies immediately
   const fs=p.fontSize||1;
@@ -865,6 +872,9 @@ function applyPrefs(rerender){
   // cal view
   const wrap=document.getElementById('calWrap');
   if(wrap){wrap.classList.toggle('scroll-mode',p.calView==='scroll');}
+  // apply theme class to root for CSS targeting
+  const root=document.getElementById('maise-root');
+  if(root){root.classList.toggle('light-mode',p.theme==='light');}
   // re-render calendar when called from settings changes
   if(rerender){renderCalendar();}
 }
@@ -2234,7 +2244,7 @@ document.addEventListener('keydown',e=>{
 load();
 if(!S.recurRules)S.recurRules=[];
 if(!S.recurIgnore)S.recurIgnore=[];
-if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'light',fontSize:1};
+if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'dark',fontSize:1};
 populateRecurring();
 applyPrefs();
 renderAll();
