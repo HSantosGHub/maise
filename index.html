@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>index.html</title>
+<title>MAISE — Cash Flow Calendar</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -329,6 +329,49 @@ header{display:flex;align-items:center;justify-content:space-between;padding:13p
 .scope-btn:hover{border-color:var(–accent);background:var(–accent-dim);}
 .scope-btn-title{font-size:13px;font-weight:600;color:var(–text);}
 .scope-btn-sub{font-size:11px;color:var(–text3);}
+
+/* ── GUIDE / REMINDER ── */
+.guide-btn{background:none;border:1px solid var(–border);color:var(–text3);width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:11px;font-weight:700;font-family:‘DM Mono’,monospace;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;letter-spacing:0;}
+.guide-btn:hover{border-color:var(–accent);color:var(–accent);}
+.guide-panel{background:var(–surface);width:100%;max-width:500px;border-radius:var(–radius);border:1px solid var(–border);transform:scale(.95);transition:transform .2s cubic-bezier(.32,.72,0,1);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+.overlay.active .guide-panel{transform:scale(1);}
+.guide-body{flex:1;overflow-y:auto;padding:16px 20px 20px;display:flex;flex-direction:column;gap:4px;}
+.guide-section{margin-bottom:18px;}
+.guide-section-title{font-family:‘DM Mono’,monospace;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(–accent);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(–border);}
+.guide-p{font-size:12px;color:var(–text2);line-height:1.75;margin-bottom:8px;}
+.guide-p strong{color:var(–text);font-weight:600;}
+.guide-steps{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.guide-step{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;background:var(–surface2);border:1px solid var(–border);border-radius:var(–radius-sm);transition:border-color .15s;}
+.guide-step:hover{border-color:var(–border2);}
+.guide-step-num{font-family:‘DM Mono’,monospace;font-size:10px;font-weight:500;color:var(–accent);background:var(–accent-dim);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.guide-step-text{font-size:12px;color:var(–text2);line-height:1.6;}
+.guide-step-text strong{color:var(–text);}
+.guide-warn{background:var(–yellow-dim);border:1px solid rgba(255,217,125,.25);border-radius:var(–radius-sm);padding:10px 13px;margin-bottom:10px;}
+.guide-warn-title{font-family:‘DM Mono’,monospace;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(–yellow);margin-bottom:5px;}
+.guide-warn-text{font-size:12px;color:var(–text2);line-height:1.65;}
+.guide-footer{padding:12px 20px 16px;border-top:1px solid var(–border);display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.guide-last-export{flex:1;font-family:‘DM Mono’,monospace;font-size:10px;color:var(–text3);}
+
+/* reminder modal — matches app panel style */
+.reminder-panel{background:var(–surface);width:100%;max-width:400px;border-radius:var(–radius);border:1px solid var(–border);transform:scale(.95);transition:transform .2s cubic-bezier(.32,.72,0,1);overflow:hidden;}
+.overlay.active .reminder-panel{transform:scale(1);}
+.reminder-stripe{height:3px;background:var(–accent);}
+.reminder-inner{padding:20px 22px 6px;}
+.reminder-mono{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(–accent);margin-bottom:8px;}
+.reminder-title{font-size:17px;font-weight:600;color:var(–text);margin-bottom:12px;line-height:1.3;}
+.reminder-p{font-size:12px;color:var(–text2);line-height:1.75;margin-bottom:10px;}
+.reminder-p strong{color:var(–text);}
+.reminder-divider{height:1px;background:var(–border);margin:4px 0 16px;}
+.reminder-footer{padding:0 22px 20px;display:flex;flex-direction:column;gap:7px;}
+/* import staleness badge */
+.import-stale-badge{font-family:‘DM Mono’,monospace;font-size:9px;letter-spacing:.08em;padding:2px 7px;border-radius:10px;flex-shrink:0;}
+.import-stale-ok{background:var(–green-dim);color:var(–green);}
+.import-stale-warn{background:var(–yellow-dim);color:var(–yellow);}
+.import-stale-old{background:var(–red-dim);color:var(–red);}
+.import-track-row{display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(–surface2);border:1px solid var(–border);border-radius:var(–radius-sm);margin-bottom:5px;}
+.import-track-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.import-track-name{flex:1;font-size:12px;}
+.import-track-meta{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–text3);}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(–border2);border-radius:2px;}
@@ -347,7 +390,10 @@ header{padding:11px 13px;}
 <div id="maise-root">
 
 <header>
-  <div class="logo">MAISE <span>cash flow</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <div class="logo">maise <span>cash flow</span></div>
+    <button class="guide-btn" onclick="openGuide()" title="Guide & Best Practices">?</button>
+  </div>
   <div class="hdr-nav">
     <button class="nav-btn" id="prevMonth">&#8249;</button>
     <div class="month-label" id="monthLabel" onclick="openMonthPicker()">—</div>
@@ -445,7 +491,20 @@ header{padding:11px 13px;}
   <div class="panel-scale" style="max-width:370px">
     <div class="modal-title" id="acctModalTitle">Add Account</div>
     <div class="form-group"><div class="form-lbl">Name</div><input type="text" class="form-input" id="acctNameInput" placeholder="Checking, Savings…"></div>
-    <div class="form-group"><div class="form-lbl">Color</div><div id="colorPicker" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:4px;align-items:center;"></div></div>
+    <div class="form-group"><div class="form-lbl">Color</div><div style="display:flex;align-items:center;gap:12px;margin-top:4px"><input type="color" id="acctColorPicker" style="width:44px;height:44px;border:none;background:none;cursor:pointer;padding:0;border-radius:50%;flex-shrink:0"><span id="acctColorVal" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)"></span></div></div>
+    <div class="form-group" style="margin-top:4px">
+      <div class="form-lbl">Import Tracking</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 11px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-top:4px">
+        <div>
+          <div style="font-size:12px;color:var(--text)">Track days since last import</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:1px">Shows a badge on this account when data may be stale</div>
+        </div>
+        <div class="toggle-wrap" id="importTrackToggle">
+          <button class="toggle-opt" id="importTrackOn" onclick="setImportTrack(true)">On</button>
+          <button class="toggle-opt" id="importTrackOff" onclick="setImportTrack(false)">Off</button>
+        </div>
+      </div>
+    </div>
     <div class="modal-actions">
       <button class="btn-primary" onclick="saveAccount()" style="flex:1;justify-content:center">Save</button>
       <button class="btn-ghost" onclick="closeAcctOverlay()">Cancel</button>
@@ -611,12 +670,15 @@ const COLORS=[
   {hex:'#7effa0',dim:'rgba(126,255,160,0.15)'},
 ];
 const ACCENT_COLORS=[
+  // Standard
   {name:'Teal',val:'#7effd4'},{name:'Blue',val:'#7eb8ff'},{name:'Coral',val:'#ff9f7e'},
   {name:'Purple',val:'#d97eff'},{name:'Gold',val:'#ffd97e'},{name:'Green',val:'#7effa0'},
   {name:'Pink',val:'#ff7eb8'},{name:'Sky',val:'#7edfff'},
+  // Earthy / muted
   {name:'Sage',val:'#a8c5a0'},{name:'Terracotta',val:'#c47c5a'},{name:'Sand',val:'#c9b07a'},
   {name:'Moss',val:'#7a9e7e'},{name:'Clay',val:'#b06b52'},{name:'Dusty Rose',val:'#c47a8a'},
   {name:'Olive',val:'#8a9a5b'},{name:'Warm Stone',val:'#a89880'},
+  // Dark / muted
   {name:'Slate Blue',val:'#6a8caf'},{name:'Muted Teal',val:'#5a9a8a'},{name:'Steel',val:'#7a8fa0'},
   {name:'Plum',val:'#8a5a8a'},{name:'Forest',val:'#5a7a5a'},{name:'Burnt Orange',val:'#c47040'},
   {name:'Dusk',val:'#8a7aaf'},{name:'Rust',val:'#a05a3a'},
@@ -631,19 +693,19 @@ const SRC_ICONS={manual:'✏️',imported:'🏦',recurring:'↻'};
 let S={
   currentYear:new Date().getFullYear(),
   currentMonth:new Date().getMonth(),
-  accounts:[],
-  selected:[],
-  balances:{},
-  transactions:{},
-  recurRules:[],
-  recurIgnore:[],
-  prefs:{
-    calView:'month',
+  accounts:[],      // [{id,name,colorIdx}]
+  selected:[],      // account ids; empty=all
+  balances:{},      // {"acctId:Y-M":number}
+  transactions:{},  // {"Y-M-D":[{id,acctId,label,amount,cleared,source,note,recurring,ruleId}]}
+  recurRules:[],    // [{id,acctId,label,amount,dayOfMonth,endDate}]
+  recurIgnore:[],   // [labelKey] — "don't ask again" patterns
+  prefs:{           // customization
+    calView:'month',      // 'month'|'scroll'
     showDayBal:true,
     showPills:true,
-    cellDensity:'comfortable',
+    cellDensity:'comfortable', // 'compact'|'comfortable'|'spacious'
     accentColor:'#7effd4',
-    theme:'dark',
+    theme:'light',
     fontSize:1,
   },
 };
@@ -651,7 +713,6 @@ let detailDate=null;
 let txType='expense';
 let editingAcctId=null;
 let selColorIdx=0;
-let selColor=null; // NEW: tracks custom color from wheel
 let pending=[];
 let recurQueue=[];
 let recurQueueIdx=0;
@@ -664,24 +725,27 @@ function load(){
   try{
     const r=localStorage.getItem('maise_v3');
     if(r){S={...S,...JSON.parse(r)};applyPrefs();return;}
+    // migrate v2
     const old=localStorage.getItem('maise_v2');
     if(old){
       const o=JSON.parse(old);
       S={...S,...o};
-      if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'dark',fontSize:1};
+      if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'light',fontSize:1};
       if(!S.recurRules)S.recurRules=[];
       if(!S.recurIgnore)S.recurIgnore=[];
+      // tag existing transactions with source
       Object.values(S.transactions).forEach(txs=>txs.forEach(tx=>{
         if(!tx.source)tx.source=tx.cleared?'imported':'manual';
         if(tx.recurring&&!tx.source)tx.source='recurring';
       }));
       save();applyPrefs();return;
     }
+    // migrate v1
     const old1=localStorage.getItem('maise_v1');
     if(old1){
       const o=JSON.parse(old1);
       const id=uid();
-      S.accounts=[{id,name:o.accountName||'My Account',colorIdx:0,colorHex:COLORS[0].hex}];
+      S.accounts=[{id,name:o.accountName||'My Account',colorIdx:0}];
       if(o.transactions)Object.entries(o.transactions).forEach(([k,txs])=>{
         S.transactions[k]=txs.map(t=>({...t,acctId:id,source:t.cleared?'imported':'manual'}));
       });
@@ -697,17 +761,15 @@ function load(){
 const uid=()=>Math.random().toString(36).slice(2,10);
 const dkey=(y,m,d)=>`${y}-${m}-${d}`;
 const bkey=(aid,y,m)=>`${aid}:${y}-${m}`;
-
-// UPDATED: color() now accepts an account object and prefers colorHex
-const color=a=>{
-  if(!a)return COLORS[0];
-  if(a.colorHex){
-    const rgb=hexToRgb(a.colorHex);
-    return{hex:a.colorHex,dim:`rgba(${rgb},0.15)`};
-  }
-  return COLORS[(a.colorIdx||0)%COLORS.length];
-};
-
+const color=idx=>COLORS[idx%COLORS.length];
+function acctColor(acct){
+  if(acct&&acct.acctColor){return{hex:acct.acctColor,dim:hexToDim(acct.acctColor)};}
+  return color(acct?acct.colorIdx||0:0);
+}
+function hexToDim(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return`rgba(${r},${g},${b},0.15)`;
+}
 const fmt=n=>{
   const s=Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   return(n<0?'\u2212':'')+'$'+s;
@@ -761,6 +823,7 @@ function combinedBalAtDayStart(y,m,d){
 function applyPrefs(rerender){
   const p=S.prefs;
   const r=document.documentElement;
+  // accent color
   const ac=p.accentColor||'#7effd4';
   const rgb=hexToRgb(ac);
   r.style.setProperty('--accent',ac);
@@ -768,6 +831,7 @@ function applyPrefs(rerender){
   r.style.setProperty('--accent-dim',`rgba(${rgb},0.12)`);
   r.style.setProperty('--accent-dim2',`rgba(${rgb},0.06)`);
   r.style.setProperty('--green-dim',`rgba(${rgb},0.12)`);
+  // theme
   if(p.theme==='light'){
     r.style.setProperty('--bg','#f4f5f7');
     r.style.setProperty('--surface','#ffffff');
@@ -787,6 +851,7 @@ function applyPrefs(rerender){
     r.style.setProperty('--text2','#8b909e');
     r.style.setProperty('--text3','#555b6a');
   }
+  // font size + cell density — inject a <style> tag so Safari applies immediately
   const fs=p.fontSize||1;
   const densityMap={compact:'70px 6px',comfortable:'96px 8px',spacious:'130px 12px'};
   const [minH,pad]=(densityMap[p.cellDensity]||'96px 8px').split(' ');
@@ -795,8 +860,10 @@ function applyPrefs(rerender){
   dynStyle.textContent=
     `#maise-root{zoom:${fs};}` +
     `.day-cell{min-height:${minH}!important;padding:${pad}!important;}`;
+  // cal view
   const wrap=document.getElementById('calWrap');
   if(wrap){wrap.classList.toggle('scroll-mode',p.calView==='scroll');}
+  // re-render calendar when called from settings changes
   if(rerender){renderCalendar();}
 }
 
@@ -817,12 +884,14 @@ function renderAcctBar(){
   const allChip=document.getElementById('allChip');
   allChip.className=`chip chip-all${S.selected.length===0?' sel':''}`;
   S.accounts.forEach(a=>{
-    const c=color(a);
+    const c=acctColor(a);
     const isSel=S.selected.includes(a.id);
     const chip=document.createElement('button');
     chip.className=`chip${isSel?' sel':''}`;
     chip.style.cssText=isSel?`--ac:${c.hex};--ac-dim:${c.dim};border-color:${c.hex};color:${c.hex};background:${c.dim}`:'';
-    chip.innerHTML=`<div class="chip-dot" style="background:${c.hex}"></div>${a.name}`;
+    const daysSinceImport=a.trackImport&&a.lastImport?Math.floor((Date.now()-a.lastImport)/(1000*60*60*24)):null;
+    const staleBadge=daysSinceImport!==null?`<span class="import-stale-badge ${daysSinceImport<=7?'import-stale-ok':daysSinceImport<=14?'import-stale-warn':'import-stale-old'}">${daysSinceImport}d</span>`:'';
+    chip.innerHTML=`<div class="chip-dot" style="background:${c.hex}"></div>${a.name}${staleBadge}`;
     chip.onclick=()=>toggleAcct(a.id);
     bar.insertBefore(chip,addBtn);
   });
@@ -843,6 +912,7 @@ function renderCalendar(){
   const p=S.prefs;
 
   if(p.calView==='scroll'){
+    // continuous scroll — show full current month as a list
     const days=new Date(y,m+1,0).getDate();
     const today=new Date();
     for(let d=1;d<=days;d++){
@@ -901,7 +971,7 @@ function makeCell(y,m,d,other,isToday){
     const pills=document.createElement('div');pills.className='tx-pills';
     txs.slice(0,3).forEach(tx=>{
       const a=S.accounts.find(a=>a.id===tx.acctId);
-      const c=color(a);
+      const c=a?acctColor(a):COLORS[0];
       const pill=document.createElement('div');
       pill.className=`tx-pill ${tx.amount>=0?'income':'expense'}${tx.cleared?' cleared':''}`;
       const srcIcon=tx.source==='imported'?'🏦':tx.source==='recurring'?'↻':tx.recurring?'↻':'';
@@ -915,7 +985,7 @@ function makeCell(y,m,d,other,isToday){
     dot.style.cssText='display:flex;gap:3px;flex-wrap:wrap;padding-top:2px;';
     txs.slice(0,6).forEach(tx=>{
       const a=S.accounts.find(a=>a.id===tx.acctId);
-      const c=color(a);
+      const c=a?acctColor(a):COLORS[0];
       const d2=document.createElement('div');
       d2.style.cssText=`width:5px;height:5px;border-radius:50%;background:${tx.amount>=0?c.hex:'var(--red)'};opacity:${tx.cleared?.5:1}`;
       dot.appendChild(d2);
@@ -944,7 +1014,7 @@ function updateBalBar(){
   const el=document.getElementById('endBal');el.textContent=fmt(end);el.className=`bal-val ${bc(end)}`;
   const list=document.getElementById('acctBalList');list.innerHTML='';
   active.forEach(a=>{
-    const c=color(a);
+    const c=acctColor(a);
     let b=getStartBal(a.id,y,m);
     for(let d=1;d<=days;d++)getDayTxs(y,m,d).filter(t=>t.acctId===a.id).forEach(t=>b+=t.amount);
     const item=document.createElement('div');item.className='bal-acct-item';
@@ -970,6 +1040,7 @@ function openDetail(y,m,d){
 }
 function refreshTxAcctSel(){
   const sel=document.getElementById('txAcctSel');sel.innerHTML='';
+  // pre-select the active account if only one is selected
   const active=activeAccounts();
   S.accounts.forEach(a=>{const o=document.createElement('option');o.value=a.id;o.textContent=a.name;sel.appendChild(o);});
   if(active.length===1)sel.value=active[0].id;
@@ -986,29 +1057,37 @@ function renderDetail(){
   else{
     txs.forEach(tx=>{
       const a=S.accounts.find(a=>a.id===tx.acctId);
-      const c=color(a);
+      const c=a?acctColor(a):COLORS[0];
       const src=tx.source||'manual';
       const srcIcon=src==='imported'?'🏦':src==='recurring'?'↻':tx.recurring?'↻':'✏️';
       const srcTitle=src==='imported'?'Imported from bank':src==='recurring'?'Recurring':'Manually entered';
       const row=document.createElement('div');
       row.className=`tx-row${tx.cleared?' is-cleared':''}`;
+      // check
       const chk=document.createElement('div');
       chk.className=`tx-check${tx.cleared?' checked':''}`;
       chk.innerHTML=tx.cleared?'&#10003;':'';
       chk.onclick=()=>toggleCleared(tx.id);
+      // acct dot
       const dot=document.createElement('div');dot.className='tx-acct-dot';dot.style.background=c.hex;dot.title=a?a.name:'';
+      // source icon
       const srcEl=document.createElement('span');srcEl.className=`tx-src-icon src-${src}`;srcEl.textContent=srcIcon;srcEl.title=srcTitle;
+      // label+note
       const lblWrap=document.createElement('div');lblWrap.className='tx-label-wrap';
       const lbl=document.createElement('div');lbl.className='tx-label';lbl.textContent=tx.label;
       lblWrap.appendChild(lbl);
       if(tx.note){const note=document.createElement('div');note.className='tx-note';note.textContent=tx.note;lblWrap.appendChild(note);}
+      // amount
       const amt=document.createElement('div');amt.className=`tx-amount ${tx.amount>=0?'pos':'neg'}`;amt.textContent=fmt(tx.amount);
+      // action buttons
       const actions=document.createElement('div');actions.className='tx-actions';
+      // recurring toggle
       const recurBtn=document.createElement('button');
       recurBtn.className=`tx-act-btn${tx.recurring||src==='recurring'?' recur-on':''}`;
       recurBtn.title=tx.recurring?'Remove recurring':'Mark as recurring';
       recurBtn.textContent='↻';
       recurBtn.onclick=()=>toggleTxRecurring(tx.id);
+      // delete
       const delBtn=document.createElement('button');delBtn.className='tx-act-btn del';delBtn.title='Delete';delBtn.textContent='×';
       delBtn.onclick=()=>deleteTx(tx.id);
       actions.appendChild(recurBtn);actions.appendChild(delBtn);
@@ -1047,6 +1126,7 @@ function addTx(){
   document.getElementById('txLabel').value='';document.getElementById('txAmt').value='';document.getElementById('txNote').value='';
   document.getElementById('txLabel').focus();
   save();renderDetail();
+  // scan for recurring
   clearTimeout(window._recurTimer);
   window._recurTimer=setTimeout(()=>{
     const c=scanAllForRecurring();
@@ -1065,16 +1145,24 @@ function toggleTxRecurring(id){
   const tx=(S.transactions[dkey(y,m,d)]??[]).find(t=>t.id===id);
   if(!tx)return;
   if(tx.recurring||tx.source==='recurring'){
+    // remove recurring flag
     tx.recurring=false;tx.source='manual';
-    if(tx.ruleId){S.recurRules=S.recurRules.filter(r=>r.id!==tx.ruleId);}
+    if(tx.ruleId){
+      S.recurRules=S.recurRules.filter(r=>r.id!==tx.ruleId);
+    }
   } else {
+    // open recurring setup for this transaction
     openRecurFromTx(tx,y,m,d);
     return;
   }
   save();renderDetail();
 }
 function openRecurFromTx(tx,y,m,d){
-  const candidate={acctId:tx.acctId,label:tx.label,amount:tx.amount,dayOfMonth:d,count:1,fromTx:tx.id};
+  // pre-fill recurring review with this single transaction
+  const candidate={
+    acctId:tx.acctId,label:tx.label,amount:tx.amount,
+    dayOfMonth:d,count:1,fromTx:tx.id
+  };
   recurQueue=[candidate];recurQueueIdx=0;
   document.getElementById('recurTitle').textContent='Set as Recurring';
   document.getElementById('recurSub').textContent='Auto-populate this transaction on future months.';
@@ -1093,9 +1181,20 @@ function deleteTx(id){
   if(!tx)return;
   if(tx.recurring||tx.source==='recurring'){
     openScopeModal(
-      'Delete recurring transaction',tx.label,
-      ()=>{tx.recurring=false;tx.source='manual';tx.ruleId=undefined;S.transactions[k]=S.transactions[k].filter(t=>t.id!==id);save();renderDetail();},
-      ()=>{if(tx.ruleId)removeFutureRecurring(tx.ruleId);S.transactions[k]=S.transactions[k].filter(t=>t.id!==id);save();renderDetail();renderCalendar();}
+      'Delete recurring transaction',
+      tx.label,
+      ()=>{
+        // Just this one — detach from rule
+        tx.recurring=false;tx.source='manual';tx.ruleId=undefined;
+        S.transactions[k]=S.transactions[k].filter(t=>t.id!==id);
+        save();renderDetail();
+      },
+      ()=>{
+        // All future — delete this and future occurrences
+        if(tx.ruleId)removeFutureRecurring(tx.ruleId);
+        S.transactions[k]=S.transactions[k].filter(t=>t.id!==id);
+        save();renderDetail();renderCalendar();
+      }
     );
     return;
   }
@@ -1104,82 +1203,50 @@ function deleteTx(id){
 }
 
 // ═══════════════════════════════════════════════════════
-// ACCOUNT MODAL — updated with color wheel
+// ACCOUNT MODAL
 // ═══════════════════════════════════════════════════════
+let importTrackEnabled=false;
+function setImportTrack(val){
+  importTrackEnabled=val;
+  document.getElementById('importTrackOn').className='toggle-opt'+(val?' on':'');
+  document.getElementById('importTrackOff').className='toggle-opt'+(!val?' on':'');
+}
 function openAddAccount(){
   editingAcctId=null;
-  selColorIdx=S.accounts.length%COLORS.length;
-  selColor=null;
   document.getElementById('acctModalTitle').textContent='Add Account';
   document.getElementById('acctNameInput').value='';
-  renderColorPicker();closeSetupBtn();
+  const defaults=['#7effd4','#7eb8ff','#ff9f7e','#d97eff','#ffd97e','#7effa0'];
+  const defColor=defaults[S.accounts.length%defaults.length];
+  document.getElementById('acctColorPicker').value=defColor;
+  document.getElementById('acctColorVal').textContent=defColor;
+  setImportTrack(false);
+  closeSetupBtn();
   document.getElementById('acctOverlay').classList.add('active');
   setTimeout(()=>document.getElementById('acctNameInput').focus(),100);
 }
 function openEditAccount(id){
   const a=S.accounts.find(a=>a.id===id);if(!a)return;
   editingAcctId=id;
-  selColorIdx=a.colorIdx||0;
-  selColor=a.colorHex||null;
   document.getElementById('acctModalTitle').textContent='Edit Account';
   document.getElementById('acctNameInput').value=a.name;
-  renderColorPicker();
+  const hex=a.acctColor||COLORS[a.colorIdx%COLORS.length].hex;
+  document.getElementById('acctColorPicker').value=hex;
+  document.getElementById('acctColorVal').textContent=hex;
+  setImportTrack(a.trackImport||false);
   document.getElementById('acctOverlay').classList.add('active');
 }
-
-// UPDATED: renderColorPicker now includes a color wheel + presets
-function renderColorPicker(){
-  const p=document.getElementById('colorPicker');p.innerHTML='';
-
-  // Color wheel input
-  const currentHex=selColor||COLORS[selColorIdx%COLORS.length].hex;
-  const wheel=document.createElement('input');
-  wheel.type='color';
-  wheel.value=currentHex;
-  wheel.style.cssText='width:36px;height:36px;border:none;background:none;cursor:pointer;border-radius:50%;padding:0;flex-shrink:0;';
-  wheel.title='Pick any color';
-  wheel.oninput=()=>{
-    selColor=wheel.value;
-    selColorIdx=-1;
-    // update swatch borders
-    p.querySelectorAll('.preset-swatch').forEach(sw=>{
-      sw.style.border=`2px solid transparent`;
-    });
-  };
-  p.appendChild(wheel);
-
-  // Divider
-  const div=document.createElement('div');
-  div.style.cssText='width:1px;height:28px;background:var(--border2);flex-shrink:0;margin:0 2px;';
-  p.appendChild(div);
-
-  // Preset swatches
-  COLORS.forEach((c,i)=>{
-    const isSel=!selColor&&selColorIdx===i;
-    const b=document.createElement('div');
-    b.className='preset-swatch';
-    b.style.cssText=`width:24px;height:24px;border-radius:50%;background:${c.hex};cursor:pointer;border:2px solid ${isSel?'#fff':'transparent'};transition:border .15s;flex-shrink:0;`;
-    b.onclick=()=>{
-      selColorIdx=i;
-      selColor=null;
-      wheel.value=c.hex;
-      p.querySelectorAll('.preset-swatch').forEach((sw,j)=>{
-        sw.style.border=`2px solid ${j===i?'#fff':'transparent'}`;
-      });
-    };
-    p.appendChild(b);
-  });
-}
-
-// UPDATED: saveAccount now uses selColor when set
+document.addEventListener('DOMContentLoaded',()=>{
+  const cp=document.getElementById('acctColorPicker');
+  if(cp)cp.oninput=()=>{document.getElementById('acctColorVal').textContent=cp.value;};
+});
 function saveAccount(){
   const name=document.getElementById('acctNameInput').value.trim();if(!name)return;
-  const finalColor=selColor||COLORS[Math.max(0,selColorIdx)%COLORS.length].hex;
+  const hex=document.getElementById('acctColorPicker').value;
   if(editingAcctId){
     const a=S.accounts.find(a=>a.id===editingAcctId);
-    if(a){a.name=name;a.colorHex=finalColor;a.colorIdx=selColorIdx>=0?selColorIdx:0;}
+    if(a){a.name=name;a.acctColor=hex;a.colorIdx=0;a.trackImport=importTrackEnabled;}
   } else {
-    S.accounts.push({id:uid(),name,colorHex:finalColor,colorIdx:selColorIdx>=0?selColorIdx:0});
+    S.accounts.push({id:uid(),name,colorIdx:0,acctColor:hex,trackImport:importTrackEnabled,lastImport:null});
   }
   save();closeAcctOverlay();renderAll();openSetup();
 }
@@ -1192,10 +1259,19 @@ function openSetup(){
   const list=document.getElementById('acctList');list.innerHTML='';
   if(!S.accounts.length){list.innerHTML='<div style="color:var(--text3);font-size:12px;text-align:center;padding:14px 0">No accounts yet.</div>';}
   else S.accounts.forEach(a=>{
-    const c=color(a);
+    const c=acctColor(a);
     const row=document.createElement('div');row.className='acct-row';
     const dot=document.createElement('div');dot.className='acct-row-color';dot.style.background=c.hex;
-    const name=document.createElement('div');name.className='acct-row-name';name.textContent=a.name;
+    const name=document.createElement('div');name.className='acct-row-name';
+    const nameText=document.createElement('span');nameText.textContent=a.name;
+    name.appendChild(nameText);
+    if(a.trackImport){
+      const days=a.lastImport?Math.floor((Date.now()-a.lastImport)/(1000*60*60*24)):null;
+      const badge=document.createElement('span');badge.className=`import-stale-badge ${days===null?'import-stale-warn':days<=7?'import-stale-ok':days<=14?'import-stale-warn':'import-stale-old'}`;
+      badge.textContent=days===null?'no import yet':`${days}d ago`;
+      badge.style.marginLeft='7px';
+      name.appendChild(badge);
+    }
     const editBtn=document.createElement('button');editBtn.className='acct-row-btn';editBtn.textContent='Edit';
     editBtn.addEventListener('click',ev=>{ev.stopPropagation();openEditAccount(a.id);});
     const delBtn=document.createElement('button');delBtn.className='acct-row-del';delBtn.textContent='×';
@@ -1228,7 +1304,7 @@ function openBalEdit(){
   const active=activeAccounts();
   if(!active.length){fields.innerHTML='<div style="color:var(--text3);font-size:12px">No accounts selected.</div>';return;}
   active.forEach(a=>{
-    const c=color(a);
+    const c=acctColor(a);
     const isManual=isBalManuallySet(a.id,y,m);
     const autoVal=getPrevMonthEndBal(a.id,y,m);
     const displayVal=isManual?S.balances[bkey(a.id,y,m)]:autoVal;
@@ -1277,8 +1353,10 @@ function openSummary(){
   const body=document.getElementById('summaryBody');body.innerHTML='';
   const active=activeAccounts();
   const days=new Date(y,m+1,0).getDate();
+  // gather all visible txs
   const allTxs=[];
   for(let d=1;d<=days;d++)getVisibleDayTxs(y,m,d).forEach(tx=>allTxs.push({...tx,day:d}));
+  // group by label
   const groups={};
   allTxs.forEach(tx=>{
     const k=tx.label.trim();
@@ -1291,6 +1369,7 @@ function openSummary(){
   const totalOut=expenses.reduce((s,g)=>s+g.total,0);
   const startBal=active.reduce((s,a)=>s+getStartBal(a.id,y,m),0);
 
+  // totals row
   const totals=document.createElement('div');totals.className='summary-totals';
   totals.innerHTML=`<div class="summary-total-item"><div class="summary-total-lbl">Start</div><div class="summary-total-val ${bc(startBal)}">${fmt(startBal)}</div></div><div class="summary-total-item"><div class="summary-total-lbl">In</div><div class="summary-total-val pos">${fmt(totalIn)}</div></div><div class="summary-total-item"><div class="summary-total-lbl">Out</div><div class="summary-total-val neg">${fmt(Math.abs(totalOut))}</div></div><div class="summary-total-item"><div class="summary-total-lbl">Net</div><div class="summary-total-val ${bc(startBal+totalIn+totalOut)}">${fmt(startBal+totalIn+totalOut)}</div></div>`;
   body.appendChild(totals);
@@ -1301,7 +1380,7 @@ function openSummary(){
     const t=document.createElement('div');t.className='summary-section-title';t.textContent=title;sec.appendChild(t);
     items.forEach(g=>{
       const a=S.accounts.find(a=>a.id===g.acctId);
-      const c=color(a);
+      const c=a?acctColor(a):COLORS[0];
       const row=document.createElement('div');row.className='summary-row';
       row.innerHTML=`<div class="summary-row-label"><div style="width:7px;height:7px;border-radius:50%;background:${c.hex}"></div>${g.label}${g.count>1?`<span style="font-size:10px;color:var(--text3);margin-left:5px">×${g.count}</span>`:''}</div><div class="summary-row-amt ${bc(g.total)}">${fmt(g.total)}</div>`;
       sec.appendChild(row);
@@ -1342,7 +1421,7 @@ function renderSearch(){
   if(!matches.length){res.innerHTML='<div class="search-empty">No results found.</div>';return;}
   matches.slice(0,60).forEach(tx=>{
     const a=S.accounts.find(a=>a.id===tx.acctId);
-    const c=color(a);
+    const c=a?acctColor(a):COLORS[0];
     const row=document.createElement('div');row.className='search-result';
     const dateStr=new Date(tx.y,tx.m,tx.d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
     row.innerHTML=`<div style="width:7px;height:7px;border-radius:50%;background:${c.hex};flex-shrink:0"></div><div class="search-result-date">${dateStr}</div><div class="search-result-label">${tx.label}${tx.note?`<div style="font-size:10px;color:var(--text3)">${tx.note}</div>`:''}</div><div class="search-result-amt ${bc(tx.amount)}">${fmt(tx.amount)}</div>`;
@@ -1385,6 +1464,7 @@ function openCustomize(){
     return row;
   };
 
+  // CALENDAR section
   const calSec=document.createElement('div');calSec.className='cust-section';
   const calTitle=document.createElement('div');calTitle.className='cust-section-title';calTitle.textContent='Calendar';
   calSec.appendChild(calTitle);
@@ -1394,52 +1474,20 @@ function openCustomize(){
   calSec.appendChild(makeRow('Cell Size','Amount of space per day',makeToggle([{label:'Compact',val:'compact'},{label:'Normal',val:'comfortable'},{label:'Spacious',val:'spacious'}],p.cellDensity,v=>{S.prefs.cellDensity=v;save();applyPrefs(true);})));
   body.appendChild(calSec);
 
+  // APPEARANCE section
   const appSec=document.createElement('div');appSec.className='cust-section';
   const appTitle=document.createElement('div');appTitle.className='cust-section-title';appTitle.textContent='Appearance';
   appSec.appendChild(appTitle);
   appSec.appendChild(makeRow('Theme','',makeToggle([{label:'Dark',val:'dark'},{label:'Light',val:'light'}],p.theme,v=>{S.prefs.theme=v;save();applyPrefs();})));
 
-  const accentWrap=document.createElement('div');accentWrap.style.cssText='display:flex;flex-direction:column;gap:10px;width:100%';
-  const wheelRow=document.createElement('div');wheelRow.style.cssText='display:flex;align-items:center;gap:10px';
-  const wheelInput=document.createElement('input');wheelInput.type='color';wheelInput.value=p.accentColor||'#7effd4';
-  wheelInput.style.cssText='width:40px;height:40px;border:none;background:none;cursor:pointer;border-radius:50%;padding:0;flex-shrink:0;';
-  wheelInput.title='Pick any color';
-  const wheelLbl=document.createElement('div');wheelLbl.style.cssText='font-size:11px;color:var(--text3);font-family:DM Mono,monospace;';
-  wheelLbl.textContent='Custom: '+(p.accentColor||'#7effd4');
-  wheelInput.oninput=()=>{
-    S.prefs.accentColor=wheelInput.value;
-    wheelLbl.textContent='Custom: '+wheelInput.value;
-    save();applyPrefs();
-    document.querySelectorAll('.color-swatch').forEach(sw=>sw.classList.toggle('sel',sw.dataset.val===wheelInput.value));
-  };
-  wheelRow.appendChild(wheelInput);wheelRow.appendChild(wheelLbl);
-  accentWrap.appendChild(wheelRow);
+  // accent color — wheel only
+  const accentWheel=document.createElement('input');accentWheel.type='color';
+  accentWheel.value=p.accentColor||'#7effd4';
+  accentWheel.style.cssText='width:44px;height:44px;border:none;background:none;cursor:pointer;padding:0;border-radius:50%;flex-shrink:0;';
+  accentWheel.oninput=()=>{S.prefs.accentColor=accentWheel.value;save();applyPrefs();};
+  appSec.appendChild(makeRow('Accent Color','Pick any color',accentWheel));
 
-  const swatches=document.createElement('div');swatches.className='color-swatches';swatches.style.cssText='display:flex;gap:6px;flex-wrap:wrap;';
-  ACCENT_COLORS.forEach(ac=>{
-    const sw=document.createElement('div');
-    sw.className=`color-swatch${p.accentColor===ac.val?' sel':''}`;
-    sw.style.background=ac.val;sw.title=ac.name;sw.dataset.val=ac.val;
-    sw.onclick=()=>{
-      S.prefs.accentColor=ac.val;
-      wheelInput.value=ac.val;
-      wheelLbl.textContent='Custom: '+ac.val;
-      save();applyPrefs();
-      document.querySelectorAll('.color-swatch').forEach(s=>s.classList.toggle('sel',s.dataset.val===ac.val));
-    };
-    swatches.appendChild(sw);
-  });
-  accentWrap.appendChild(swatches);
-
-  const accentRow=document.createElement('div');accentRow.className='cust-row';
-  accentRow.style.cssText='flex-direction:column;align-items:flex-start;gap:10px;';
-  const accentLblDiv=document.createElement('div');
-  const accentLbl=document.createElement('div');accentLbl.className='cust-row-label';accentLbl.textContent='Accent Color';
-  const accentSub=document.createElement('div');accentSub.className='cust-row-sub';accentSub.textContent='Tap a preset or pick any color';
-  accentLblDiv.appendChild(accentLbl);accentLblDiv.appendChild(accentSub);
-  accentRow.appendChild(accentLblDiv);accentRow.appendChild(accentWrap);
-  appSec.appendChild(accentRow);
-
+  // font size
   const fsWrap=document.createElement('div');fsWrap.className='font-size-row';
   const fsLabel=document.createElement('span');fsLabel.style.cssText='font-size:11px;color:var(--text3);font-family:DM Mono,monospace;flex-shrink:0';fsLabel.textContent='A';
   const fsSlider=document.createElement('input');fsSlider.type='range';fsSlider.min='0.8';fsSlider.max='1.3';fsSlider.step='0.05';fsSlider.value=p.fontSize||1;
@@ -1487,6 +1535,7 @@ function detectRecurring(txList){
     const ignoreKey=recurIgnoreKey(txs[0].label,txs[0].acctId);
     if((S.recurIgnore||[]).includes(ignoreKey))return;
     if((S.recurRules||[]).some(r=>r.acctId===txs[0].acctId&&r.label.trim().toLowerCase()===txs[0].label.trim().toLowerCase()))return;
+    // find most common day
     const days=[];
     Object.entries(S.transactions).forEach(([k,dayTxs])=>{
       const parts=k.split('-');const d=parseInt(parts[2]);
@@ -1553,8 +1602,10 @@ function renderRecurCard(){
   }
   const c=recurQueue[recurQueueIdx];
   const acct=S.accounts.find(a=>a.id===c.acctId);
-  const col=color(acct);
+  const col=acct?acctColor(acct):COLORS[0];
   prog.textContent=`${recurQueueIdx+1} of ${recurQueue.length}`;
+  const defEnd=new Date();defEnd.setFullYear(defEnd.getFullYear()+1);
+  const defEndStr=`${defEnd.getFullYear()}-${String(defEnd.getMonth()+1).padStart(2,'0')}`;
   card.innerHTML='';
   const lbl=document.createElement('div');lbl.className='recur-card-label';lbl.textContent=c.label;card.appendChild(lbl);
   const meta=document.createElement('div');meta.className='recur-card-meta';
@@ -1574,8 +1625,10 @@ function renderRecurCard(){
   actions.appendChild(confirmBtn);actions.appendChild(skipBtn);actions.appendChild(ignoreBtn);
   card.appendChild(actions);
 }
+function clearRecurEnd(){const i=document.getElementById('recurEndInput');if(i)i.value='';}
 function confirmRecur(c){
   if(!S.recurRules)S.recurRules=[];
+  // Open the edit form to let user configure frequency
   openRecurEditNew(c);
 }
 
@@ -1597,7 +1650,7 @@ function renderRecurRulesList(){
   } else {
     S.recurRules.forEach(rule=>{
       const acct=S.accounts.find(a=>a.id===rule.acctId);
-      const col=color(acct);
+      const col=acct?acctColor(acct):COLORS[0];
       const row=document.createElement('div');row.className='recur-item';
       const dot=document.createElement('div');dot.className='recur-item-dot';dot.style.background=col.hex;
       const lbl=document.createElement('div');lbl.className='recur-item-label';lbl.textContent=rule.label;
@@ -1772,6 +1825,11 @@ function commitImport(){
     if(!S.transactions[k])S.transactions[k]=[];
     S.transactions[k].push({id:uid(),acctId,label:item.label,amount:item.amount,cleared:true,source:'imported'});
   });
+  // Track last import time per account
+  if(toAdd.length){
+    const acct=S.accounts.find(a=>a.id===acctId);
+    if(acct)acct.lastImport=Date.now();
+  }
   save();closeImportBtn();
   if(toAdd.length){S.currentYear=toAdd[0].date.y;S.currentMonth=toAdd[0].date.m;}
   renderCalendar();
@@ -1785,6 +1843,8 @@ document.getElementById('importAcctSel').addEventListener('change',()=>{
 // DATA EXPORT
 // ═══════════════════════════════════════════════════════
 function exportJSON(){
+  S.lastExport=Date.now();
+  save();
   const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
   const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(b),download:'maise-backup.json'});
   a.click();URL.revokeObjectURL(a.href);
@@ -1814,24 +1874,30 @@ function clearAll(){
   if(confirm('Clear ALL transactions and balances?')){S.transactions={};S.balances={};save();closeSetupBtn();renderAll();}
 }
 
+
 // ═══════════════════════════════════════════════════════
 // RECURRING FREQUENCY & EDIT
 // ═══════════════════════════════════════════════════════
 const FREQ_OPTS=[
-  {val:'monthly',label:'Monthly'},
-  {val:'biweekly',label:'Biweekly'},
-  {val:'weekly',label:'Weekly'},
+  {val:'monthly',    label:'Monthly'},
+  {val:'biweekly',   label:'Biweekly'},
+  {val:'weekly',     label:'Weekly'},
   {val:'twicemonthly',label:'Twice/Month'},
-  {val:'yearly',label:'Yearly'},
-  {val:'custom',label:'Custom Days'},
+  {val:'yearly',     label:'Yearly'},
+  {val:'custom',     label:'Custom Days'},
 ];
 const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-let recurEditRuleId=null;
+let recurEditRuleId=null; // null = new rule
 let recurEditState={
   label:'',amount:0,acctId:'',
-  freq:'monthly',dayOfMonth:1,dayOfMonth2:15,
-  dayOfWeek:1,month:0,customDays:[],endDate:null,
+  freq:'monthly',
+  dayOfMonth:1,       // for monthly/yearly
+  dayOfMonth2:15,     // for twicemonthly
+  dayOfWeek:1,        // 0-6 for weekly/biweekly
+  month:0,            // 0-11 for yearly
+  customDays:[],      // for custom
+  endDate:null,
 };
 
 function freqLabel(rule){
@@ -1846,6 +1912,7 @@ function freqLabel(rule){
 }
 
 function openRecurEditNew(candidate){
+  // called from review card to let user pick frequency
   recurEditRuleId=null;
   recurEditState={
     label:candidate.label,amount:candidate.amount,acctId:candidate.acctId,
@@ -1876,6 +1943,7 @@ function renderRecurEditForm(title,sub){
   const form=document.getElementById('recurEditForm');form.innerHTML='';
   const st=recurEditState;
 
+  // Label & Amount row
   const laRow=document.createElement('div');laRow.style.cssText='display:flex;gap:8px;';
   const lblInp=document.createElement('input');lblInp.type='text';lblInp.className='form-input';
   lblInp.value=st.label;lblInp.placeholder='Label';lblInp.style.flex='1';
@@ -1887,11 +1955,13 @@ function renderRecurEditForm(title,sub){
   laRow.appendChild(lblInp);laRow.appendChild(amtInp);
   form.appendChild(laRow);
 
+  // Account
   const acctSel=document.createElement('select');acctSel.className='form-input';acctSel.style.cursor='pointer';
   S.accounts.forEach(a=>{const o=document.createElement('option');o.value=a.id;o.textContent=a.name;if(a.id===st.acctId)o.selected=true;acctSel.appendChild(o);});
   acctSel.onchange=()=>{st.acctId=acctSel.value;};
   form.appendChild(acctSel);
 
+  // Frequency
   const freqLbl=document.createElement('div');freqLbl.className='form-lbl';freqLbl.textContent='Frequency';form.appendChild(freqLbl);
   const freqGrid=document.createElement('div');freqGrid.className='freq-grid';
   FREQ_OPTS.forEach(opt=>{
@@ -1901,6 +1971,7 @@ function renderRecurEditForm(title,sub){
   });
   form.appendChild(freqGrid);
 
+  // Day picker — varies by frequency
   const dayLbl=document.createElement('div');dayLbl.className='form-lbl';
   form.appendChild(dayLbl);
 
@@ -1923,6 +1994,7 @@ function renderRecurEditForm(title,sub){
     lastBtn.addEventListener('click',()=>{st.dayOfMonth=0;renderRecurEditForm(title,sub);});
     grid.appendChild(lastBtn);
     form.appendChild(grid);
+
   } else if(st.freq==='twicemonthly'){
     dayLbl.textContent='Two Days of Month';
     const hint=document.createElement('div');hint.style.cssText='font-size:10px;color:var(--text3);margin-bottom:6px';
@@ -1935,12 +2007,14 @@ function renderRecurEditForm(title,sub){
         if(st.dayOfMonth===d){st.dayOfMonth=st.dayOfMonth2;st.dayOfMonth2=d;}
         else if(st.dayOfMonth2===d){}
         else{if(st.dayOfMonth===st.dayOfMonth2){st.dayOfMonth2=d;}else{st.dayOfMonth=d;}}
+        // ensure two distinct days
         if(st.dayOfMonth===st.dayOfMonth2)st.dayOfMonth2=st.dayOfMonth===1?2:1;
         renderRecurEditForm(title,sub);
       });
       grid.appendChild(btn);
     }
     form.appendChild(grid);
+
   } else if(st.freq==='weekly'||st.freq==='biweekly'){
     dayLbl.textContent='Day of Week';
     const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(7,1fr);gap:4px;';
@@ -1950,6 +2024,7 @@ function renderRecurEditForm(title,sub){
       grid.appendChild(btn);
     });
     form.appendChild(grid);
+
   } else if(st.freq==='custom'){
     dayLbl.textContent='Days of Month (pick multiple)';
     const grid=document.createElement('div');grid.className='day-picker-grid';
@@ -1966,6 +2041,7 @@ function renderRecurEditForm(title,sub){
     form.appendChild(grid);
   }
 
+  // End date
   const endLbl=document.createElement('div');endLbl.className='form-lbl';endLbl.textContent='End Date (optional)';form.appendChild(endLbl);
   const endRow=document.createElement('div');endRow.style.cssText='display:flex;gap:8px;align-items:center;';
   const endInp=document.createElement('input');endInp.type='month';endInp.className='form-input';endInp.style.flex='1';
@@ -1982,16 +2058,19 @@ function saveRecurEdit(){
   if(!st.label.trim()){alert('Please enter a label.');return;}
   if(!st.acctId&&S.accounts.length)st.acctId=S.accounts[0].id;
   if(recurEditRuleId){
+    // editing existing rule — update it and repopulate
     const rule=S.recurRules.find(r=>r.id===recurEditRuleId);
     if(rule){
       Object.assign(rule,{label:st.label,amount:st.amount,acctId:st.acctId,
         freq:st.freq,dayOfMonth:st.dayOfMonth===0?-1:st.dayOfMonth,
         dayOfMonth2:st.dayOfMonth2,dayOfWeek:st.dayOfWeek,month:st.month,
         customDays:st.customDays,endDate:st.endDate});
+      // remove existing future auto-populated recurring txs for this rule
       removeFutureRecurring(rule.id);
       populateRecurring();
     }
   } else {
+    // new rule from review
     const ruleId=uid();
     S.recurRules.push({
       id:ruleId,label:st.label,amount:st.amount,acctId:st.acctId,
@@ -2001,6 +2080,7 @@ function saveRecurEdit(){
       customDays:st.customDays,endDate:st.endDate,
     });
     populateRecurring();
+    // advance the review queue
     recurQueueIdx++;
     renderRecurCard();
   }
@@ -2013,6 +2093,7 @@ function removeFutureRecurring(ruleId){
   const ty=today.getFullYear(),tm=today.getMonth(),td=today.getDate();
   Object.keys(S.transactions).forEach(k=>{
     const parts=k.split('-');const y=+parts[0],m=+parts[1],d=+parts[2];
+    // only remove future ones
     if(y>ty||(y===ty&&m>tm)||(y===ty&&m===tm&&d>=td)){
       S.transactions[k]=S.transactions[k].filter(t=>!(t.ruleId===ruleId&&t.source==='recurring'&&!t.cleared));
     }
@@ -2022,6 +2103,8 @@ function removeFutureRecurring(ruleId){
 function closeRecurEdit(e){if(e.target===document.getElementById('recurEditOverlay'))closeRecurEditBtn();}
 function closeRecurEditBtn(){document.getElementById('recurEditOverlay').classList.remove('active');}
 
+// ── populateRecurring now handles all frequencies ──
+// Override the old populateRecurring
 function getDatesForRule(rule,y,m){
   const freq=rule.freq||'monthly';
   const daysInMonth=new Date(y,m+1,0).getDate();
@@ -2036,6 +2119,7 @@ function getDatesForRule(rule,y,m){
   } else if(freq==='weekly'||freq==='biweekly'){
     const targetDow=rule.dayOfWeek||1;
     const step=freq==='biweekly'?14:7;
+    // find first occurrence of targetDow in this month
     const firstDow=new Date(y,m,1).getDay();
     let firstD=1+(targetDow-firstDow+7)%7;
     for(let d=firstD;d<=daysInMonth;d+=step)dates.push(d);
@@ -2050,7 +2134,7 @@ function getDatesForRule(rule,y,m){
   return dates;
 }
 
-// ── SCOPE MODAL ──
+// ── SCOPE MODAL (just this one / all future) ──
 let scopeCallback={one:null,all:null};
 
 function openScopeModal(title,sub,onOne,onAll){
@@ -2063,6 +2147,53 @@ function openScopeModal(title,sub,onOne,onAll){
 }
 function closeScopeOverlay(e){if(!e||e.target===document.getElementById('scopeOverlay'))document.getElementById('scopeOverlay').classList.remove('active');}
 
+
+// ═══════════════════════════════════════════════════════
+// GUIDE & BACKUP REMINDER
+// ═══════════════════════════════════════════════════════
+function openGuide(){
+  const el=document.getElementById('guideLastExport');
+  const last=S.lastExport;
+  if(last){
+    const days=Math.floor((Date.now()-last)/(1000*60*60*24));
+    el.textContent=days===0?'Last export: today':`Last export: ${days} day${days===1?'':'s'} ago`;
+  } else {
+    el.textContent='No backup exported yet';
+    el.style.color='var(--red)';
+  }
+  document.getElementById('guideOverlay').classList.add('active');
+}
+function closeGuide(e){if(e.target===document.getElementById('guideOverlay'))closeGuideBtn();}
+function closeGuideBtn(){document.getElementById('guideOverlay').classList.remove('active');}
+
+function exportJSONFromGuide(){
+  exportJSON();
+  closeGuideBtn();
+}
+
+function checkReminder(){
+  const last=S.lastExport||0;
+  const daysSince=Math.floor((Date.now()-last)/(1000*60*60*24));
+  const lastReminded=S.lastReminder||0;
+  const daysSinceReminder=Math.floor((Date.now()-lastReminded)/(1000*60*60*24));
+  // Show if 7+ days since last export AND 7+ days since last reminder dismissal
+  if(daysSince>=7&&daysSinceReminder>=7){
+    document.getElementById('reminderDays').textContent=last===0?'never':daysSince;
+    document.getElementById('reminderOverlay').classList.add('active');
+  }
+}
+
+function dismissReminder(){
+  S.lastReminder=Date.now();
+  save();
+  document.getElementById('reminderOverlay').classList.remove('active');
+}
+
+function exportFromReminder(){
+  exportJSON();
+  document.getElementById('reminderOverlay').classList.remove('active');
+}
+
 // ═══════════════════════════════════════════════════════
 // KEYBOARD
 // ═══════════════════════════════════════════════════════
@@ -2071,7 +2202,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
     closeDetailBtn();closeSetupBtn();closeBalEditBtn();closeMpick();
     closeAcctOverlay();closeImportBtn();closeRecurBtn();
-    closeSummaryBtn();closeSearchBtn();closeCustomizeBtn();closeRecurEditBtn();closeScopeOverlay();
+    closeSummaryBtn();closeSearchBtn();closeCustomizeBtn();closeRecurEditBtn();closeScopeOverlay();closeGuideBtn();
   }
 });
 
@@ -2081,11 +2212,99 @@ document.addEventListener('keydown',e=>{
 load();
 if(!S.recurRules)S.recurRules=[];
 if(!S.recurIgnore)S.recurIgnore=[];
-if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'dark',fontSize:1};
+if(!S.prefs)S.prefs={calView:'month',showDayBal:true,showPills:true,cellDensity:'comfortable',accentColor:'#7effd4',theme:'light',fontSize:1};
 populateRecurring();
 applyPrefs();
 renderAll();
+setTimeout(checkReminder, 1000);
 </script>
+
+<!-- GUIDE MODAL -->
+
+<div class="overlay overlay-center" id="guideOverlay" onclick="closeGuide(event)">
+  <div class="guide-panel">
+    <div class="panel-hdr">
+      <div><div class="panel-title">Guide &amp; Best Practices</div><div class="panel-sub">How maise works and how to protect your data</div></div>
+      <button class="close-btn" onclick="closeGuideBtn()">&#215;</button>
+    </div>
+    <div class="guide-body">
+
+```
+  <div class="guide-section">
+    <div class="guide-section-title">Where is my data stored?</div>
+    <div class="guide-p">maise stores all of your data <strong>directly in your browser</strong> — think of it like a notebook that lives inside Chrome or Safari on your specific device. There is no account, no cloud, and no server storing your information.</div>
+    <div class="guide-warn">
+      <div class="guide-warn-title">⚠ Important to understand</div>
+      <div class="guide-warn-text">Because your data lives in your browser, it can be <strong>permanently lost</strong> if you clear your browser history or cookies, switch to a different browser, open the app on a different device, or uninstall and reinstall your browser. Think of it like keeping your budget in a notebook — if the notebook gets thrown away, the data is gone.</div>
+    </div>
+    <div class="guide-p">The good news: <strong>you are in full control</strong>. By exporting a backup file regularly, you can always restore your data.</div>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section-title">How to back up your data</div>
+    <div class="guide-p">maise lets you export all of your data as a single file. Do this regularly — we recommend at least once a week.</div>
+    <div class="guide-steps">
+      <div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text">Tap <strong>&#9881; Setup</strong> in the top right corner of the app.</div></div>
+      <div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">Scroll down to the <strong>Data</strong> section at the bottom of Setup.</div></div>
+      <div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">Tap <strong>Export JSON</strong>. A file called <em>maise-backup.json</em> will download to your device.</div></div>
+      <div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">Save this file somewhere safe — your Downloads folder, iCloud Drive, Google Drive, or email it to yourself.</div></div>
+    </div>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section-title">How to restore your data</div>
+    <div class="guide-p">If you switch devices, clear your browser, or open maise somewhere new, here is how to get your data back:</div>
+    <div class="guide-steps">
+      <div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text">Open maise in your browser.</div></div>
+      <div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">Tap <strong>&#9881; Setup</strong> → <strong>Import JSON</strong>.</div></div>
+      <div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">Select your <em>maise-backup.json</em> file. Everything — your accounts, transactions, recurring rules, and settings — will be restored instantly.</div></div>
+    </div>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section-title">Using maise on multiple devices</div>
+    <div class="guide-p">maise does not automatically sync between devices. If you use it on both your phone and your computer, you will need to <strong>manually transfer your data</strong> using the Export and Import steps above. Export on one device, transfer the file (email, AirDrop, Google Drive, etc.), and import on the other.</div>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-section-title">Quick tips</div>
+    <div class="guide-steps">
+      <div class="guide-step"><div class="guide-step-num">&#10003;</div><div class="guide-step-text">Export your backup <strong>at least once a week</strong> — maise will remind you.</div></div>
+      <div class="guide-step"><div class="guide-step-num">&#10003;</div><div class="guide-step-text">Keep a copy of your backup file in <strong>two places</strong> (e.g. your device and Google Drive).</div></div>
+      <div class="guide-step"><div class="guide-step-num">&#10003;</div><div class="guide-step-text">Export before switching to a new version of the app — then re-import to pick up right where you left off.</div></div>
+      <div class="guide-step"><div class="guide-step-num">&#10003;</div><div class="guide-step-text">Do <strong>not</strong> clear your browser history/cookies if you want to keep your data between exports.</div></div>
+    </div>
+  </div>
+
+</div>
+<div class="guide-footer">
+  <div class="guide-last-export" id="guideLastExport"></div>
+  <button class="btn-ghost" onclick="closeGuideBtn()">Close</button>
+  <button class="btn-primary" onclick="exportJSONFromGuide()" style="justify-content:center">Export Backup Now</button>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- WEEKLY REMINDER MODAL -->
+
+<div class="overlay overlay-center" id="reminderOverlay">
+  <div class="reminder-panel">
+    <div class="reminder-stripe"></div>
+    <div class="reminder-inner">
+      <div class="reminder-mono">Weekly Reminder</div>
+      <div class="reminder-title">Back up your data</div>
+      <div class="reminder-p">It has been <strong id="reminderDays">7</strong> days since your last backup. maise keeps all your data in your browser — not in the cloud. That means if you clear your browser, switch devices, or something goes wrong, <strong>your data is gone unless you have a backup file.</strong></div>
+      <div class="reminder-p">Exporting takes about 5 seconds. We strongly recommend doing it at least once a week.</div>
+      <div class="reminder-divider"></div>
+    </div>
+    <div class="reminder-footer">
+      <button class="btn-primary" onclick="exportFromReminder()" style="justify-content:center;width:100%">&#8595; Export Backup Now</button>
+      <button class="btn-ghost" onclick="dismissReminder()" style="width:100%;justify-content:center;font-size:12px">Remind me next week</button>
+    </div>
+  </div>
+</div>
 
 <!-- RECUR EDIT MODAL -->
 
@@ -2103,7 +2322,7 @@ renderAll();
   </div>
 </div>
 
-<!-- RECUR SCOPE MODAL -->
+<!-- RECUR SCOPE MODAL (just this one / all future) -->
 
 <div class="overlay overlay-center" id="scopeOverlay" onclick="closeScopeOverlay(event)">
   <div class="scope-panel">
